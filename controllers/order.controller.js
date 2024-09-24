@@ -1,3 +1,6 @@
+import Product from '../models/prodcut.model.js';
+import Order from '../models/order.model.js';
+
 export const createOrder = async (req, res) => {
     try {
         const { userId, products } = req.body;

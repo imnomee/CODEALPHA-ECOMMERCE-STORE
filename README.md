@@ -2,7 +2,7 @@
 
 ### Dependencies
 
-`npm install express mongoose body-parser dotenv`
+`npm install express mongoose body-parser dotenv bcryptjs jsonwebtoken`
 
 Express: Your web framework.
 Mongoose: For MongoDB database management (optional but popular).
