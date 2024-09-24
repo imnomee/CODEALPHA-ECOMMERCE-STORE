@@ -1,62 +1,87 @@
-# CODEALPHA-ECOMMERCE-STORE
+# CodeAlpha Full Stack Task -1, E-Commerce Project
 
-### Dependencies
+## Table of Contents
 
-`npm install express mongoose body-parser dotenv bcryptjs jsonwebtoken cookie-parser`
+-   [Introduction](#introduction)
+-   [Technologies Used](#technologies-used)
+-   [Features](#features)
+-   [Getting Started](#getting-started)
+-   [Usage](#usage)
+-   [API Endpoints](#api-endpoints)
+-   [License](#license)
 
-Express: Your web framework.
-Mongoose: For MongoDB database management (optional but popular).
-Body-parser: For handling JSON/form data.
-dotenv: To manage environment variables.
-Nodemon: Automatically restarts the server during development.
+## Introduction
 
-### Folder Strcuture
+This is an E-Commerce application built with the MongoDB, Express.js, Node.js and Pug for templating. The application allows users to register, log in, browse products, place orders, and manage their accounts.
 
-store/
-├── controllers/ // Handles business logic
-├── models/ // Database schema (Product, Order, etc.)
-├── routes/ // Defines API routes
-├── public/ // Static files (CSS, JS, images)
-├── views/ // Frontend (HTML templates if you're using them)
-├── app.js // Main Express app file
-└── .env // Environment variables (for database, ports, etc.)
+## Technologies Used
 
-### Routes
+-   **Backend**: Node.js, Express.js, MongoDB, Mongoose
+-   **Frontend**: Pug (template engine), HTML, CSS
+-   **Authentication**: JSON Web Tokens (JWT), BcryptJs
+-   **Middleware**: Express middleware for authentication and error handling
 
-# User Register
+## Features
 
-[localhost:7860/api/user/register] - Post
-userName
-userEmail
-userPassword
+-   User registration and authentication
+-   Product listing and management
+-   Order placement with stock management
+-   User order history
+-   Responsive design with a user-friendly interface
 
-# User Login
+## Getting Started
 
-[localhost:7860/api/user/login] - Post
+To get started with the project, follow these steps:
 
-userEmail
-userPassword
+1. **Clone the Repository**:
 
-# Create Product
+    ```bash
+    git clone https://github.com/imnomee/CODEALPHA-ECOMMERCE-STORE.git
+    ```
 
-[localhost:7860/api/products] - Post
+2. **Navigate to the Project Directory**:
 
-# Get all Products
+    ```bash
+    cd ecommerce-project
+    ```
 
-[localhost:7860/api/products] - Get
+3. **Install Dependencies**:
 
-# Update Product
+    ```bash
+    npm install
+    ```
 
-[localhost:7860/api/products/:productId] - put
+4. **Set Up Environment Variables**:
+   Create a `.env` file in the root directory and add your environment variables:
 
-# Delete Product
+    ```
+    JWT_SECRET=your_jwt_secret
+    MONGO_URI=your_mongodb_connection_string
+    PORT=7860
+    ```
 
-[localhost:7860/api/products/:productId] - delete
+5. **Run the Application**:
+    ```bash
+    npm run dev
+    ```
 
-# Create Order
+## Usage
 
-[localhost:7860/api/order]
+-   Open your browser and navigate to `http://localhost:7860` to access the application.
+-   Use the registration form to create a new account, or log in with an existing account.
 
-# Get Orders by User
+## API Endpoints
 
-[localhost:7860/api/order/66f272c239efe5bc87177331]
+| Method | Endpoint            | Description                    |
+| ------ | ------------------- | ------------------------------ |
+| POST   | /api/users/register | Register a new user            |
+| POST   | /api/users/login    | Log in a user                  |
+| GET    | /api/products       | Get all products               |
+| GET    | /api/products/:id   | Get single product             |
+| POST   | /api/orders         | Create a new order             |
+| GET    | /api/orders/:userId | Get orders for a specific user |
+| ------ | ------------------- | ------------------------------ |
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
