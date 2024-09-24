@@ -5,6 +5,12 @@ import jwt from 'jsonwebtoken'; // Import JSON Web Token library
 export const registerUser = async (req, res) => {
     try {
         const { userName, userEmail, userPassword } = req.body; // Destructure user data from request body
+        console.log(userName, userEmail, userPassword);
+        if (!userName || !userEmail || !userPassword) {
+            return res.status(400).json({
+                message: 'All fields are required',
+            });
+        }
 
         // Check if the user already exists
         let user = await User.findOne({ userEmail });
@@ -33,7 +39,7 @@ export const registerUser = async (req, res) => {
             },
         });
     } catch (error) {
-        console.log('RegisterUser', error); // Log any errors that occur
+        console.log('RegisterUser', error.message); // Log any errors that occur
         return res.status(500).json({
             // Return a server error response
             message: 'Server Error',
@@ -86,7 +92,7 @@ export const loginUser = async (req, res) => {
                 },
             });
     } catch (error) {
-        console.log('LoginUser', error); // Log any errors that occur
+        console.log('LoginUser', error.message); // Log any errors that occur
         return res.status(500).json({
             // Return a server error response
             message: 'Server Error',

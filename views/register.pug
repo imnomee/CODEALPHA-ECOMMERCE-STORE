@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+      head
+            title Ecommerce User Login
+      body
+            h1 Register User
+            form(action="/api/user/register" method='post')
+                  label(for="userName") Enter username:
+                        input(type="text" name='userName' value='nomee') 
+                  label(for="userEmail") Enter email:
+                        input(type="email" name='userEmail' value='nomeepk@gmail.com') 
+                  label(for="userPassword") Enter password:
+                        input(type="password" name='userPassword' value='nomee786') 
+                  button(type='submit') Submit
+
+      
