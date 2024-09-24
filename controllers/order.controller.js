@@ -24,7 +24,7 @@ export const createOrder = async (req, res) => {
                 }
 
                 //update total Price
-                totalPrice += product.price * item.quantity;
+                totalPrice += product.productPrice * item.quantity;
 
                 //update product stock
                 product.stock -= item.quantity;
@@ -36,7 +36,7 @@ export const createOrder = async (req, res) => {
             })
         );
         const order = new Order({
-            user: userId,
+            userId,
             products: productDetails,
             totalPrice,
         });
@@ -45,16 +45,17 @@ export const createOrder = async (req, res) => {
         return res.status(201).json({
             message: 'Order Created',
             status: true,
+            order,
         });
     } catch (error) {
-        console.log('CreateOrder', error);
+        console.log('CreateOrder', error.message);
     }
 };
 
 export const getUserOrders = async (req, res) => {
     try {
         const userId = req.params.userId;
-        const orders = await Order.find({ user: userId }).populate(
+        const orders = await Order.find({ userId }).populate(
             'products.product'
         );
         if (!orders) {

@@ -1,4 +1,5 @@
 import User from '../models/user.model.js';
+import jwt from 'jsonwebtoken';
 
 export const registerUser = async (req, res) => {
     try {
@@ -47,7 +48,7 @@ export const loginUser = async (req, res) => {
             });
         }
         //compare passwords
-        const isMatch = await User.comparePassword(userPassword);
+        const isMatch = await user.comparePassword(userPassword);
         if (!isMatch) {
             return res.status(400).json({
                 message: 'Invalid email or password',
@@ -60,14 +61,22 @@ export const loginUser = async (req, res) => {
             expiresIn: '1h',
         });
 
-        return res.status(201).json({
-            token,
-            user: {
-                id: user.id,
-                name: user.userName,
-                email: user.userEmail,
-            },
-        });
+        return res
+            .status(201)
+            .cookie('token', token, {
+                // Ensure token is set correctly in the cookie
+                maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day in milliseconds
+                httpOnly: true, // Securely set the token as HTTP-only
+                sameSite: 'strict', // SameSite policy for added security
+            })
+            .json({
+                token,
+                user: {
+                    id: user.id,
+                    name: user.userName,
+                    email: user.userEmail,
+                },
+            });
     } catch (error) {
         console.log('LoginUser', error);
     }

@@ -2,7 +2,7 @@
 
 ### Dependencies
 
-`npm install express mongoose body-parser dotenv bcryptjs jsonwebtoken`
+`npm install express mongoose body-parser dotenv bcryptjs jsonwebtoken cookie-parser`
 
 Express: Your web framework.
 Mongoose: For MongoDB database management (optional but popular).
@@ -20,3 +20,43 @@ store/
 ├── views/ // Frontend (HTML templates if you're using them)
 ├── app.js // Main Express app file
 └── .env // Environment variables (for database, ports, etc.)
+
+### Routes
+
+# User Register
+
+[localhost:7860/api/user/register] - Post
+userName
+userEmail
+userPassword
+
+# User Login
+
+[localhost:7860/api/user/login] - Post
+
+userEmail
+userPassword
+
+# Create Product
+
+[localhost:7860/api/products] - Post
+
+# Get all Products
+
+[localhost:7860/api/products] - Get
+
+# Update Product
+
+[localhost:7860/api/products/:productId] - put
+
+# Delete Product
+
+[localhost:7860/api/products/:productId] - delete
+
+# Create Order
+
+[localhost:7860/api/order]
+
+# Get Orders by User
+
+[localhost:7860/api/order/66f272c239efe5bc87177331]
