@@ -9,37 +9,18 @@ import productRoutes from './routes/product.route.js'; // Routes for product man
 import userRoutes from './routes/user.route.js'; // Routes for user management
 import orderRoutes from './routes/order.route.js'; // Routes for order management
 
+import viewRoutes from './routes/views.route.js';
+
 const app = express(); // Create an instance of Express
+
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 // Middleware Configuration
 app.use(bodyParser.urlencoded({ extended: true })); // for forms with URL-encoded data
 app.use(bodyParser.json()); // Parses incoming JSON requests and puts the parsed data in req.body
 app.use(cookieParser()); // Parses cookies attached to the client request
-
-app.set('view engine', 'pug');
-app.set('views', './views'); // Specify the directory for your Pug files
-
-//Frontend
-app.get('/', (req, res) => {
-    return res.render('index');
-});
-
-app.get('/products', (req, res) => {
-    const products = { a: 'one', b: 'two', c: 'three' };
-    return res.render('products', { products });
-});
-app.get('/products/:id', (req, res) => {
-    return res.render('product');
-});
-app.get('/user/login', (req, res) => {
-    return res.render('login');
-});
-app.get('/user/register', (req, res) => {
-    console.log(req.body);
-    return res.render('register');
-});
-app.get('/create/products', (req, res) => {
-    return res.render('newProduct');
-});
+app.use('/', viewRoutes);
 
 // Route Definitions
 app.use('/api/products', productRoutes); // Product management routes
