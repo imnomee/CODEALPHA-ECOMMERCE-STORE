@@ -1,1 +1,15 @@
-h1 Register User
+doctype html
+html(lang="en")
+  head
+    title Register
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    h1 Register
+    form(action="/api/user/register" method="POST")
+      label(for="userName") Username:
+      input(type="text" name="userName" required)
+      label(for="userEmail") Email:
+      input(type="email" name="userEmail" required)
+      label(for="userPassword") Password:
+      input(type="password" name="userPassword" required)
+      button(type="submit") Register

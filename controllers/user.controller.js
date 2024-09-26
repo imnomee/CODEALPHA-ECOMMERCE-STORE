@@ -74,11 +74,16 @@ export const loginUser = async (req, res) => {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1h', // Token expiration time
         });
-
+        const userId = user._id;
         // Set the token in an HTTP-only cookie and return user info
         return res
             .status(201)
             .cookie('token', token, {
+                maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day in milliseconds
+                httpOnly: true, // Securely set the token as HTTP-only
+                sameSite: 'strict', // SameSite policy for added security
+            })
+            .cookie('userId', userId, {
                 maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day in milliseconds
                 httpOnly: true, // Securely set the token as HTTP-only
                 sameSite: 'strict', // SameSite policy for added security

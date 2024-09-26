@@ -4,10 +4,14 @@ import Order from '../models/order.model.js'; // Import the Order model
 // Create a new order
 export const createOrder = async (req, res) => {
     try {
-        const { userId, products } = req.body; // Destructure userId and products from the request body
-
+        const cartData = JSON.parse(req.body.cartData);
+        const { userId, products } = cartData; // Destructure userId and products from the request body
         // Calculate total price
         let totalPrice = 0;
+        if (!products)
+            return res
+                .status(400)
+                .json({ message: 'no products', status: false });
         const productDetails = await Promise.all(
             products.map(async (item) => {
                 const product = await Product.findById(item.product); // Find product by ID

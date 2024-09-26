@@ -1,6 +1,40 @@
-h2= product.productName
-h3= product._id
-p= product.productName
-p= product.productDescn
-p= product.productPrice
-img(src=product.productImage height='200px')
+doctype html
+html
+   head
+      meta(charset='utf-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      title= `CodeAlpha E-Commerce ${title}`
+   body
+      h2= product.productName
+      h3= product._id
+      p= product.productDescn
+      p Price: $#{product.productPrice}
+      img(src=product.productImage height='200px')
+      br
+      input#quantityInput(type='number' placeholder='Enter quantity' name='productQuantity' min='1' value='1')
+
+      // Pass productId safely
+      button(onclick=`addToCart('${product._id}')`) Add to cart
+      br
+      a(href='/productsCart') View Cart
+
+      script.
+         function addToCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let quantity = document.getElementById('quantityInput').value; // Get quantity value from the input field
+            const existingProduct = cart.find(item => item.productId === productId);
+
+            // Manually add productName and productPrice for demonstration
+            const productName = "#{product.productName}";
+            const productPrice = #{product.productPrice};
+            const productImage = '#{product.productImage}';
+
+            if (existingProduct) {
+               existingProduct.quantity += parseInt(quantity, 10);
+            } else {
+               cart.push({ productId, productName, productPrice, quantity: parseInt(quantity, 10), productImage });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart');
+         }
