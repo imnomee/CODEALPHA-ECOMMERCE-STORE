@@ -3,6 +3,99 @@ html
    head
       meta(charset='utf-8')
       meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      style.
+         /* Global Styles */
+         * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+         }
+         body {
+           font-family: Arial, sans-serif;
+           background-color: #f4f4f4;
+           color: #333;
+           padding: 20px;
+         }
+         h1 {
+           text-align: center;
+           color: #333;
+           margin-bottom: 20px;
+         }
+         nav {
+           margin-bottom: 20px;
+         }
+         nav ul {
+           display: flex;
+           justify-content: center;
+           list-style-type: none;
+           background-color: #333;
+           padding: 10px;
+         }
+         nav ul li {
+           margin: 0 10px;
+         }
+         nav ul li a {
+           color: white;
+           text-decoration: none;
+           font-weight: bold;
+         }
+         nav ul li a:hover {
+           color: #ff8800;
+         }
+         .products {
+            display: flex;
+         }
+         .product {
+           display: inline-block;
+           border: 1px solid #ccc;
+           padding: 10px;
+           margin: 10px;
+           width: 200px;
+           text-align: center;
+           background-color: white;
+           min-height: 400px;
+           min-width: 300px;
+         }
+         .product img {
+           width: 100%;
+           height: auto;
+         }
+         .product p {
+           margin: 10px 0;
+           font-size: 16px;
+         }
+         .product a {
+           text-decoration: none;
+           color: #333;
+           font-weight: bold;
+         }
+         .product a:hover {
+           color: #ff8800;
+         }
+         .orders {
+           margin: 30px 10px;
+         }
+         .orders .list {
+            display: flex;
+            gap: 10px;
+            min-height: 200px;
+            min-width: 400px;
+         }
+         .order {
+           border: 1px solid #ddd;
+           padding: 15px;
+           margin: 10px 0;
+           background-color: white;
+         }
+         .order p {
+           font-size: 14px;
+           margin-bottom: 5px;
+         }
+         footer {
+           margin-top: 40px;
+           text-align: center;
+           color: #777;
+         }
       title= `CodeAlpha E-Commerce ${title}` 
    body
       h1 Welcome to our store
@@ -14,12 +107,26 @@ html
             li: a(href="/user/login") Login
             li: a(href="/productsCart") Viw Cart
       h2 Products
-      each product in products
-         h3= product._id
-         p= product.productName
-         p= product.productDescn
-         p= product.productPrice
-         a(href=`/products/${product._id}`)
-            img(src=product.productImage height='200px')
+      .products
+         each product in products
+            .product
+               h3= product._id
+               p= product.productName
+               p= product.productDescn
+               p= product.productPrice
+               a(href=`/products/${product._id}`)
+                  img(src=product.productImage height='200px')
+      .orders
+         h2 Orders 
+         .list
+            each order in orders
+               .order
+                  h3= order._id
+                  p= order.totalPrice
+                  p= order.status
+                  p= order.orderDate
+   footer
+      p 2024 Hey Im Nomee.
+         a(href='https://www.linkedin.com/in/heyimnomee/') LinkedIn
 
 

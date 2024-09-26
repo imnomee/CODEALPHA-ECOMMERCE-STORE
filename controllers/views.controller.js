@@ -1,13 +1,18 @@
 import Product from '../models/prodcut.model.js';
+import Order from '../models/order.model.js';
 
 export const home = async (req, res, next) => {
+    const userId = req.cookies.userId || '';
     //get products
     const products = await Product.find();
-    //build template
+    const orders = userId && (await Order.find({ userId }));
+
     //render template using the products
     return res.status(200).render('base', {
         title: 'Home',
         products,
+        userId,
+        orders,
     });
 };
 
