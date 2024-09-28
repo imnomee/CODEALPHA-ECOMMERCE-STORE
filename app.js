@@ -11,13 +11,21 @@ import orderRoutes from './routes/order.route.js'; // Routes for order managemen
 import path from 'path';
 import viewRoutes from './routes/views.route.js';
 
+//Meta url
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url); // Get current file URL
+const __dirname = dirname(__filename); // Get directory name of current file
+
 const app = express(); // Create an instance of Express
 
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.set('views', './views');
 // Public Assets
-app.use(express.static('public'));
 
 // Middleware Configuration
 app.use(bodyParser.urlencoded({ extended: true })); // for forms with URL-encoded data

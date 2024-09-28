@@ -16,7 +16,8 @@
     "type": "module",
     "scripts": {
         "start": "node app.js",
-        "build": "echo 'Nothing to build'"
+        "build": "echo 'Nothing to build'",
+        "dev": "nodemon app.js"
     },
     "keywords": [],
     "author": "",
