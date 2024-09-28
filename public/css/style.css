@@ -1,28 +1,22 @@
-/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     padding: 20px;
 }
-
 h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
-
-/* Navigation Styles */
 nav {
     margin-bottom: 20px;
 }
-
 nav ul {
     display: flex;
     justify-content: center;
@@ -30,27 +24,20 @@ nav ul {
     background-color: #333;
     padding: 10px;
 }
-
 nav ul li {
     margin: 0 10px;
 }
-
 nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
-
 nav ul li a:hover {
     color: #ff8800;
 }
-
-/* Product List Styles */
-h2 {
-    margin-top: 40px;
-    color: #444;
+.products {
+    display: flex;
 }
-
 .product {
     display: inline-block;
     border: 1px solid #ccc;
@@ -59,46 +46,44 @@ h2 {
     width: 200px;
     text-align: center;
     background-color: white;
+    min-height: 400px;
+    min-width: 300px;
 }
-
 .product img {
     width: 100%;
     height: auto;
 }
-
 .product p {
     margin: 10px 0;
     font-size: 16px;
 }
-
 .product a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
 }
-
 .product a:hover {
     color: #ff8800;
 }
-
-/* Order List Styles */
 .orders {
-    margin-top: 50px;
+    margin: 30px 10px;
 }
-
+.orders .list {
+    display: flex;
+    gap: 10px;
+    min-height: 200px;
+    min-width: 400px;
+}
 .order {
     border: 1px solid #ddd;
     padding: 15px;
     margin: 10px 0;
     background-color: white;
 }
-
 .order p {
     font-size: 14px;
     margin-bottom: 5px;
 }
-
-/* Footer Styles */
 footer {
     margin-top: 40px;
     text-align: center;

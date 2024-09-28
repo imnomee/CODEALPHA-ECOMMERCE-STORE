@@ -1,7 +1,7 @@
 import Product from '../models/prodcut.model.js';
 import Order from '../models/order.model.js';
 
-export const home = async (req, res, next) => {
+export const home = async (req, res) => {
     const userId = req.cookies.userId || '';
     //get products
     const products = await Product.find();
@@ -16,10 +16,11 @@ export const home = async (req, res, next) => {
     });
 };
 
-export const getProducts = (req, res) => {
+export const getProducts = async (req, res) => {
+    const products = await Product.find();
     return res.status(200).render('products', {
         title: 'Products',
-        user: 'Nomee',
+        products,
     });
 };
 export const getSingleProduct = async (req, res) => {
@@ -43,6 +44,7 @@ export const userRegister = (req, res) => {
         user: 'Nomee',
     });
 };
+
 export const productCart = (req, res) => {
     const userId = req.cookies.userId || '';
     return res.status(200).render('cart', {

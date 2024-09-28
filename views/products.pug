@@ -1,8 +1,13 @@
-doctype html 
-html
-   head
-      meta(charset='utf-8')
-      meta(name='viewport' content='width=device-width, initial-scale=1.0')
-      title= `CodeAlpha E-Commerce ${title}` 
-   body
-      h1 All Products 
+extends layout
+
+block content
+   h1 All Products 
+   .products
+      each product in products
+         .product
+            h3= product._id
+            p= product.productName
+            p= product.productDescn
+            p= product.productPrice
+            a(href=`/products/${product._id}`)
+               img(src=product.productImage height='200px')

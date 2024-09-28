@@ -1,12 +1,9 @@
-doctype html
-html(lang="en")
-  head
-    title Login
-  body
-    h1 Login
-    form(action="/api/user/login" method="POST")
-      label(for="userEmail") Email:
-      input(type="email" name="userEmail" required id='userEmail')
-      label(for="userPassword") Password:
-      input(type="password" name="userPassword" required id='userPassword')
-      button(type="submit") Login
+extends layout
+block content
+  h1 Login
+  form(action="/api/user/login" method="POST")
+    label(for="userEmail") Email:
+    input(type="email" name="userEmail" required id='userEmail')
+    label(for="userPassword") Password:
+    input(type="password" name="userPassword" required id='userPassword')
+    button(type="submit") Login

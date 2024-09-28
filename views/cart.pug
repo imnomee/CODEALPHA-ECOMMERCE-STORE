@@ -1,90 +1,87 @@
-doctype html
-html(lang="en")
-  head
-    title Cart
-  body
-    h1 Your Cart
+extends layout
+block content
+  h1 Your Cart
 
-    table
-      thead
-        tr
-          th Product Name
-          th Quantity
-          th Price
-          th Image
-          th Actions
-      tbody(id="cart-items")
-      
-    p#empty-cart-message Your cart is empty
-
-    h3 Total: $<span id="total-price">0.00</span>
-
-    form(action="/api/order" method="POST")
-      input(type="hidden" name="cartData" id="cartDataInput")
-      button(type="submit") Place Order
+  table
+    thead
+      tr
+        th Product Name
+        th Quantity
+        th Price
+        th Image
+        th Actions
+    tbody(id="cart-items")
     
-    br
-    a(href='/') Continue Shopping (Back to main)
+  p#empty-cart-message Your cart is empty
 
-    script.
-      const userId = '#{userId}'
-      document.addEventListener('DOMContentLoaded', function () {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  h3 Total: $<span id="total-price">0.00</span>
 
-        // If the cart is empty, show the empty cart message
-        if (!cart.length) {
-          document.getElementById('empty-cart-message').style.display = 'block';
-          return;
-        }
+  form(action="/api/order" method="POST")
+    input(type="hidden" name="cartData" id="cartDataInput")
+    button(type="submit") Place Order
+  
+  br
+  a(href='/products') Continue Shopping (Back to Products)
 
-        const order = {
-          userId,
-          'products': []
-        }
+  script.
+    const userId = '#{userId}'
+    document.addEventListener('DOMContentLoaded', function () {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        // Hide the empty cart message if cart has items
-        document.getElementById('empty-cart-message').style.display = 'none';
+      // If the cart is empty, show the empty cart message
+      if (!cart.length) {
+        document.getElementById('empty-cart-message').style.display = 'block';
+        return;
+      }
 
-        let cartItemsContainer = document.getElementById('cart-items');
-        let totalPrice = 0;
+      const order = {
+        userId,
+        'products': []
+      }
 
-        // Loop through each item in the cart and render it
-        cart.forEach(product => {
-          let productRow = document.createElement('tr');
-          const single = {'product':product.productId, 'quantity':product.quantity}
-          order['products'].push(single);
+      // Hide the empty cart message if cart has items
+      document.getElementById('empty-cart-message').style.display = 'none';
 
-          productRow.innerHTML = `
-            <td>${product.productName}</td>
-            <td>${product.quantity}</td>
-            <td>$${product.productPrice * product.quantity}</td>
-            <td><img src=${product.productImage} width='50px'/></td>
+      let cartItemsContainer = document.getElementById('cart-items');
+      let totalPrice = 0;
 
-            <td><button onclick="removeFromCart('${product.productId}')">Remove</button></td>
-          `;
-          
-          totalPrice += product.productPrice * product.quantity;
-          cartItemsContainer.appendChild(productRow);
+      // Loop through each item in the cart and render it
+      cart.forEach(product => {
+        let productRow = document.createElement('tr');
+        const single = {'product':product.productId, 'quantity':product.quantity}
+        order['products'].push(single);
 
-        });
+        productRow.innerHTML = `
+          <td>${product.productName}</td>
+          <td>${product.quantity}</td>
+          <td>$${product.productPrice * product.quantity}</td>
+          <td><img src=${product.productImage} width='50px'/></td>
 
-        // Update the total price
-        document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+          <td><button onclick="removeFromCart('${product.productId}')">Remove</button></td>
+        `;
+        
+        totalPrice += product.productPrice * product.quantity;
+        cartItemsContainer.appendChild(productRow);
 
-        // Set the hidden input value with the cart data for order submission
-
-        document.getElementById('cartDataInput').value = JSON.stringify(order);
       });
 
-      function removeFromCart(productId) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      // Update the total price
+      document.getElementById('total-price').innerText = totalPrice.toFixed(2);
 
-        // Filter out the product with the given ID
-        cart = cart.filter(product => product.productId !== productId);
+      // Set the hidden input value with the cart data for order submission
 
-        // Save updated cart back to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cartDataInput').value = JSON.stringify(order);
+    });
 
-        // Reload the page to reflect changes
-        window.location.reload();
-      }
+    function removeFromCart(productId) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Filter out the product with the given ID
+      cart = cart.filter(product => product.productId !== productId);
+
+      // Save updated cart back to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Reload the page to reflect changes
+      window.location.reload();
+    }

@@ -16,6 +16,9 @@ const app = express(); // Create an instance of Express
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+// Public Assets
+app.use(express.static('public'));
+
 // Middleware Configuration
 app.use(bodyParser.urlencoded({ extended: true })); // for forms with URL-encoded data
 app.use(bodyParser.json()); // Parses incoming JSON requests and puts the parsed data in req.body
