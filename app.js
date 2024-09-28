@@ -8,14 +8,14 @@ import mongoose from 'mongoose'; // MongoDB object modeling tool
 import productRoutes from './routes/product.route.js'; // Routes for product management
 import userRoutes from './routes/user.route.js'; // Routes for user management
 import orderRoutes from './routes/order.route.js'; // Routes for order management
-
+import path from 'path';
 import viewRoutes from './routes/views.route.js';
 
 const app = express(); // Create an instance of Express
 
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('views', './views');
-
 // Public Assets
 app.use(express.static('public'));
 
